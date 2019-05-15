@@ -11,8 +11,12 @@
 |
 */
 
+use App\Card;
+
 Route::get('/', function () {
-    return view('welcome');
+
+    $cards = Card::inRandomOrder()->limit(9)->get();
+    return view('front', compact('cards'));
 });
 
 
@@ -21,14 +25,8 @@ Route::group([
     'role' => 'User'
 ],function() {
 
-    Route::get('/propose',
-        [ 'uses' =>'CardPropositionController@index',
-            'as' => 'propose.index']);
-
-    Route::post('/propose',
-        [ 'uses' =>'CardPropositionController@store',
-            'as' => 'propose.create']);
-});
+    Route::resource('propositions', 'CardPropositionController');
+  });
 
 
 Auth::routes();
