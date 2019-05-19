@@ -32,6 +32,7 @@ class CardPropositionController extends Controller
         $cardProposition->attack = request('cardAttack');
         $cardProposition->health = request('cardHealth');
         $cardProposition->rarity = request('cardRarity');
+        $cardProposition->fraction = request('cardFraction');
         if(request('cardRarity') === 'Zwyczajna'){
             $cardProposition->scraps_cost = 20;
             $cardProposition->scraps_earned = 5;

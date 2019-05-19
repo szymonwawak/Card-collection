@@ -19,6 +19,7 @@ class CardsTableSeeder extends Seeder
         $card->attack=5;
         $card->health=5;
         $card->rarity='Legendarna';
+        $card->fraction='Nierząd';
         $card->scraps_cost=1600;
         $card->scraps_earned=400;
         $card->filename = ' janusz_szalony_tytan ';
@@ -32,6 +33,7 @@ class CardsTableSeeder extends Seeder
         $card->attack=8;
         $card->health=8;
         $card->rarity='Legendarna';
+        $card->fraction='Opozycja';
         $card->scraps_cost=1600;
         $card->scraps_earned=400;
         $card->filename = ' donald_zdobywca ';
@@ -44,6 +46,7 @@ class CardsTableSeeder extends Seeder
         $card->attack=8;
         $card->health=8;
         $card->rarity='Legendarna';
+        $card->fraction='Rząd';
         $card->scraps_cost=1600;
         $card->scraps_earned=400;
         $card->filename = ' jaroslaw_van_damme ';

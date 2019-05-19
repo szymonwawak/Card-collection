@@ -160,3 +160,72 @@ header.masthead h1 {
 .home-card{
     width:100%;
 }
+
+.masthead .card{
+    height:400px;
+    width:500px;
+    margin:auto;
+    font-family: 'Bangers';
+}
+.masthead .card-header{
+    background-color:#a07b0b !important;
+}
+.masthead .card-header h2{
+    color:#FFf;
+    font-size:50px;
+}
+
+.masthead .card-body{
+    background-color:#e8c86a;
+}
+.form-group{
+    font-size:20px;
+}
+.card-body .btn{
+    font-size:30px;
+}
+.header {
+    background-image: url('../img/banner.jpg');
+    height:20vh;
+    background-size:cover;}
+
+#menu .nav-item .nav-link{
+    font-family: 'Bangers' !important;
+    font-size:25px;
+    color: #FFF;
+    padding: 0 1rem;
+}
+#menu .nav-item {
+    background-color: rgb(141, 11, 216);
+    padding: 10px !important;
+    margin:10px;
+}
+#menu .navbar{
+    background-color:rgb(84, 5, 129);
+    padding: 10px 20px;
+}
+#menu .active{
+    color:#c51f1a !important;
+}
+.content {
+    padding-top:80px;
+    padding-bottom:80px;
+    background-color:#E8C86A;
+    min-height:70vh;
+    font-family: 'Bangers' !important;
+}
+.content .card{
+    margin:auto;
+    width:75vw;
+    border:none;
+}
+
+.content .card-header{
+    background: linear-gradient(60deg,#8CD2C9,#75B2AF);
+    box-shadow: 0 12px 20px -10px rgba(76,175,80,.28), 0 4px 20px 0 rgba(0,0,0,.12), 0 7px 8px -5px rgba(76,175,80,.2);
+    border-radius: 3px !important;
+    margin: -20px 30px 0;
+}
+.content .card-content{
+    padding:30px 60px;
+}

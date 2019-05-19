@@ -21,6 +21,7 @@ class CreateCardPropositionsTable extends Migration
             $table->integer('attack');
             $table->integer('health');
             $table->string('rarity');
+            $table->string('fraction');
             $table->integer('scraps_cost');
             $table->integer('scraps_earned');
             $table->string('user_name');
