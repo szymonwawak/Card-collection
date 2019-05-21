@@ -22,7 +22,7 @@ class CardsTableSeeder extends Seeder
         $card->fraction='Nierząd';
         $card->scraps_cost=1600;
         $card->scraps_earned=400;
-        $card->filename = ' janusz_szalony_tytan ';
+        $card->filename = 'janusz_szalony_tytan.png';
         $card->save();
 
 
@@ -36,7 +36,7 @@ class CardsTableSeeder extends Seeder
         $card->fraction='Opozycja';
         $card->scraps_cost=1600;
         $card->scraps_earned=400;
-        $card->filename = ' donald_zdobywca ';
+        $card->filename = 'donald_zdobywca.png';
         $card->save();
 
         $card = new \App\Card();
@@ -49,7 +49,7 @@ class CardsTableSeeder extends Seeder
         $card->fraction='Rząd';
         $card->scraps_cost=1600;
         $card->scraps_earned=400;
-        $card->filename = ' jaroslaw_van_damme ';
+        $card->filename = 'jaroslaw_van_damme.png';
         $card->save();
     }
 }

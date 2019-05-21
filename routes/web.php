@@ -26,8 +26,16 @@ Route::group([
 ],function() {
 
     Route::resource('propositions', 'CardPropositionController');
+    Route::resource('cards', 'CardController');
   });
 
+Route::group([
+    'middleware' => 'roles',
+    'role' => 'Administrator'
+],function() {
+
+    Route::get('/cards/create/{id}', 'CardController@createFromProposition')->name('createFromProposition');
+});
 
 Auth::routes();
 
