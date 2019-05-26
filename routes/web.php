@@ -21,12 +21,16 @@ Route::get('/', function () {
 
 
 Route::group([
-    'middleware' => 'roles',
+    'middleware' => 'roles','trim',
     'role' => 'User'
 ],function() {
 
+    Route::get('collection/search', 'UserCardController@search');
     Route::resource('propositions', 'CardPropositionController');
-    Route::resource('cards', 'CardController');
+    Route::resource('collection', 'UserCardController');
+
+
+
   });
 
 Route::group([
@@ -35,6 +39,8 @@ Route::group([
 ],function() {
 
     Route::get('/cards/create/{id}', 'CardController@createFromProposition')->name('createFromProposition');
+    Route::get('cards/search', 'CardController@search');
+    Route::resource('cards', 'CardController');
 });
 
 Auth::routes();

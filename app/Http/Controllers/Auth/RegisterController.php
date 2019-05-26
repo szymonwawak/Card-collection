@@ -69,6 +69,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
         $user->roles()->attach(1);
+        $user->cards()->attach([1,2,3,10,13,14,15]);
         return $user;
     }
 }

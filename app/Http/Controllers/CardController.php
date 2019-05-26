@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Card;
 use App\CardProposition;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CardController extends Controller
 {
@@ -44,7 +45,7 @@ class CardController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'cardName' => 'required|max:40',
+            'cardName' => 'required|max:40|unique:cards,name',
             'cardDescription' => 'required|max:200',
             'cardCost' => 'required|integer',
             'cardAttack' => 'required|integer',
@@ -76,9 +77,9 @@ class CardController extends Controller
             $card->scraps_earned = 400;
         }
         $image = $request->file('image');
-        $imageName = $image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
+        $imageName = $image->getClientOriginalName();
 
-        $image->move(public_path('images'),$imageName);
+        $image->move(public_path('img'),$imageName);
         $card->filename = $imageName;
         $card->save();
 
@@ -104,7 +105,7 @@ class CardController extends Controller
      */
     public function edit($id)
     {
-        $proposition = CardProposition::find($id);
+        $card = Card::find($id);
 
 
     }
@@ -129,6 +130,14 @@ class CardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Card::find($id)->delete();
+        return redirect('/cards')->with('success', 'Usuwanie pomyślne');
+    }
+
+    public function search(Request $request){
+        $search = $request->get('search');
+        $cards = DB::table('cards')->where('name', 'like', '%'.$search.'%' )
+            ->orWhere('description', 'like','%'.$search.'%' )->paginate(10);
+        return view('cards.index',compact('cards'));
     }
 }
