@@ -40,6 +40,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Role', 'user_roles', 'user_id', 'role_id')->withTimestamps();
     }
+    public function cards()
+    {
+        return $this->belongsToMany('App\Card', 'collections', 'user_id', 'card_id')->withTimestamps();
+    }
 
     public function hasAnyRole($roles){
         if(is_array($roles)) {

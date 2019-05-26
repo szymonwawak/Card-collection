@@ -25,8 +25,13 @@ Route::group([
     'role' => 'User'
 ],function() {
 
+    Route::get('collection/search', 'UserCardController@search');
     Route::resource('propositions', 'CardPropositionController');
-    Route::resource('cards', 'CardController');
+    Route::resource('collection', 'UserCardController');
+    Route::resource('users','UserController');
+
+
+
   });
 
 Route::group([
@@ -35,6 +40,8 @@ Route::group([
 ],function() {
 
     Route::get('/cards/create/{id}', 'CardController@createFromProposition')->name('createFromProposition');
+    Route::get('cards/search', 'CardController@search');
+    Route::resource('cards', 'CardController');
 });
 
 Auth::routes();
