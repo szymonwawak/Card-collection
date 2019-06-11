@@ -3,26 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use Auth;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
+use Throwable;
 
-class UserController extends Controller
+class StatsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return Response
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function index(Request $request)
     {
-        $users = DB::table('users')->orderBy('name', 'ASC')->paginate(10);
-        if ($request->ajax()){
-            $sections = view('users.index')->with('users', $users)->renderSections();
+        $stats = Auth::user()->stats();
+        if ($request->ajax()) {
+            $sections = view('stats.index', compact('stats'))->renderSections();
             return $sections['content'];
         }
-        return view('users.index')->with('users',$users);
+        return view('stats.index',compact('stats'));
     }
 
     /**
@@ -54,7 +54,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -83,22 +83,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return void
+     * @param  int  $id
+     * @return Response
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
+        //
     }
-    public function search(Request $request){
-        $search = $request->get('search');
-        $users = DB::table('users')->where('name', 'like', '%'.$search.'%' )
-            ->paginate(10);
-        if ($request->ajax()){
-            $sections = view('users.index')->with('users', $users)->renderSections();
-            return $sections['content'];
-        }
-        return view('users.index')->with('users', $users);
-    }
-
 }

@@ -46,7 +46,6 @@ hr.light {
     #mainNav {
         -webkit-box-shadow: none;
         box-shadow: none;
-        background-color: transparent;
     }
     #mainNav .navbar-nav .nav-item .nav-link {
         font-family: 'Bangers' !important;

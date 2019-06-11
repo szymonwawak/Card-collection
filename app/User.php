@@ -44,6 +44,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Card', 'collections', 'user_id', 'card_id')->withTimestamps();
     }
+    public function stats(){
+        return $this->hasOne('App\Stats')->first();
+    }
 
     public function hasAnyRole($roles){
         if(is_array($roles)) {

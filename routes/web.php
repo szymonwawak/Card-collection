@@ -24,10 +24,13 @@ Route::group([
     'middleware' => 'roles',
     'role' => 'User'
 ],function() {
-
+    Route::resource('stats', 'StatsController');
     Route::get('collection/search', 'UserCardController@search');
+    Route::get('collection/{id}/search', 'UserCardController@searchAsGuest');
     Route::resource('propositions', 'CardPropositionController');
     Route::resource('collection', 'UserCardController');
+    Route::get('users/search', 'UserController@search');
+    Route::get('/users/{id}/search', 'UserCardController@search');
     Route::resource('users','UserController');
 
 
@@ -46,4 +49,4 @@ Route::group([
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::redirect('/home', '/collection');

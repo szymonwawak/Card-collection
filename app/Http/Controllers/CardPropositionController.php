@@ -2,26 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\CardProposition;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class CardPropositionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $cardPropositions = CardProposition::all();
-        return view("propositions.index")->with('cardPropositions', $cardPropositions);
+        $cardPropositions = DB::table('card_propositions')->paginate(5);
+        if ($request->ajax()){
+            $sections = view('propositions.index')->with('cardPropositions', $cardPropositions)->renderSections();
+            return $sections['content'];
+        }
+        return view('propositions.index')->with('cardPropositions',$cardPropositions);
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        return view("propositions.create");
+        if ($request->ajax()){
+            $sections = view('propositions.create')->renderSections();
+            return $sections['content'];
+        }
+        return view('propositions.create');
     }
 
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate([
+        $validatedData = Validator::make($request->all(),[
             'cardName' => 'required|max:40',
             'cardDescription' => 'required|max:200',
             'cardCost' => 'required|integer',
@@ -31,6 +40,9 @@ class CardPropositionController extends Controller
             'cardFraction' => 'required|',
         ]);
 
+        if($validatedData->fails()){
+            return response()->json(['errors'=>$validatedData->errors()->all()]);
+        }
         $cardProposition = new CardProposition();
         $cardProposition->name = request('cardName');
         $cardProposition->description = request('cardDescription');
@@ -55,17 +67,24 @@ class CardPropositionController extends Controller
         $cardProposition->user_name = $request->user()->name;
         $cardProposition->save();
 
-        return redirect('propositions')->with('success', 'Dziękujemy za przesłanie nam własnej propozycji! :)');
+        return response()->json(['success'=>'Dodano rekord']);
     }
 
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         $proposition = CardProposition::find($id);
-        return view('propositions.edit', compact('proposition'));
+
+        if ($request->ajax()){
+            $sections = view('propositions.edit', compact('proposition'),compact('id'))->renderSections();
+            return $sections['content'];
+        }
+        return view('propositions.edit', compact('proposition'),compact('id'));
+
+
     }
     public function update(Request $request, $id){
 
-        $validatedData = $request->validate([
+        $validatedData = Validator::make($request->all(),[
             'cardName' => 'required|max:40',
             'cardDescription' => 'required|max:200',
             'cardCost' => 'required|integer',
@@ -74,6 +93,10 @@ class CardPropositionController extends Controller
             'cardRarity' => 'required|',
             'cardFraction' => 'required|',
         ]);
+
+        if($validatedData->fails()){
+            return response()->json(['errors'=>$validatedData->errors()->all()]);
+        }
 
         $cardProposition = CardProposition::find($id);
         $cardProposition->name = request('cardName');
@@ -98,10 +121,10 @@ class CardPropositionController extends Controller
         }
 
         $cardProposition->save();
-        return redirect ('/propositions')->with('success', 'Edycja powiodła się');
+        return response()->json(['success'=>'Pomyślnie zmodyfikowano rekord']);
+
     }
     public function destroy($id){
         CardProposition::find($id)->delete();
-        return redirect('/propositions')->with('success', 'Usuwanie pomyślne');
     }
 }

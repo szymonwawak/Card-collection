@@ -1,5 +1,6 @@
 <?php
 
+use App\Card;
 use Illuminate\Database\Seeder;
 
 class CardsTableSeeder extends Seeder
@@ -12,7 +13,7 @@ class CardsTableSeeder extends Seeder
     public function run()
     {
 
-        $card = new \App\Card();
+        $card = new Card();
         $card->name = 'Janusz: Szalony Tytan';
         $card->description='Rozmieszczenie: zniszcz całą rękę przeciwnika.';
         $card->cost = 20;
@@ -26,7 +27,7 @@ class CardsTableSeeder extends Seeder
         $card->save();
 
 
-        $card = new \App\Card();
+        $card = new Card();
         $card->name = 'Donald Zdobywca';
         $card->description='Rozmieszczenie: Wygnaj dwie karty przeciwnika na emigrację';
         $card->cost = 15;
@@ -39,7 +40,7 @@ class CardsTableSeeder extends Seeder
         $card->filename = 'donald_zdobywca.png';
         $card->save();
 
-        $card = new \App\Card();
+        $card = new Card();
         $card->name = 'Jarosław Van Damme';
         $card->description='Szarża. Gdy przeciwnik zagra stronnika, zaatakuj go';
         $card->cost = 15;
